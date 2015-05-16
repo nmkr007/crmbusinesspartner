@@ -33,9 +33,12 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
                     <li>
                         <a class="active-menu"  href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
-                     <li>
-                        <a  href="companies.php"><i class="fa fa-desktop fa-3x"></i>Companies</a>
-                    </li>
+                     <li><a  href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="companies.php">View or Delete</a></li>
+						<li><a href="addcompanies.php">Add Companies</a></li>
+					</ul></li>
                     <li>
                         <a  href="contacts.php"><i class="fa fa-qrcode fa-3x"></i>Contacts</a>
                     </li>

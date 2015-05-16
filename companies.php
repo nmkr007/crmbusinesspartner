@@ -13,11 +13,32 @@
 <!-- TABLE STYLES-->
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
+<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+
 <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
-    </script>
+//This Ajax Redirect to _SELF and excute php to display Job Information for selected Department
+function showcontent(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "Company Details are listed here...";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","displaycompanies.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
 
 <div class="wrapper">
 	<nav class="navbar-default navbar-side" role="navigation">
@@ -29,8 +50,12 @@
 
 				<li><a href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
 						Dashboard</a></li>
-				<li><a class="active-menu" href="companies.php"><i
-						class="fa fa-desktop fa-3x"></i>Companies</a></li>
+				<li><a class="active-menu" href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="companies.php">View or Delete</a></li>
+						<li><a href="addcompanies.php">Add Companies</a></li>
+					</ul></li>
 				<li><a href="contacts.php"><i class="fa fa-qrcode fa-3x"></i>Contacts</a>
 				</li>
 				<li><a href="adminregistrations.php"><i class="fa fa-table fa-3x"></i>View
@@ -49,135 +74,62 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Actions</div>
+				<div class="panel-heading">View or Delete Company Details</div>
 				<div class="panel-body">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#view" data-toggle="tab">View</a></li>
-						<li class=""><a href="#add" data-toggle="tab">Add</a></li>
-					</ul>
+					<br>
+						<form>
+							Select Company starting with:
+							 			<select name="company" onchange="showcontent(this.value)">
+										<option value="">Select</option>
+										<option value="%">ALL</option>
+										<option value="A%">A</option>
+										<option value="B%">B</option>
+										<option value="C%">C</option>
+										<option value="D%">D</option>
+										<option value="E%">E</option>
+										<option value="F%">F</option>
+										<option value="G%">G</option>
+										<option value="H%">H</option>
+										<option value="I%">I</option>
+										<option value="J%">J</option>
+										<option value="K%">K</option>
+										<option value="L%">L</option>
+										<option value="M%">M</option>
+										<option value="N%">N</option>
+										<option value="O%">O</option>
+										<option value="P%">P</option>
+										<option value="Q%">Q</option>
+										<option value="R%">R</option>
+										<option value="S%">S</option>
+										<option value="T%">T</option>
+										<option value="U%">U</option>
+										<option value="V%">V</option>
+										<option value="W%">W</option>
+										<option value="X%">X</option>
+										<option value="Y%">Y</option>
+										<option value="Z%">Z</option>
+									</select>
+								</form>
 
-					<div class="tab-content">
-						<div class="tab-pane fade active in" id="view">
 
-							<!-- Advanced Tables -->
-							<div class="panel panel-default">
-								<div class="panel-heading">Advanced Tables</div>
-								<div class="panel-body">
-									<div class="table-responsive">
-										<table class="table table-striped table-bordered table-hover"
-											id="dataTables_example">
-											<thead>
-												<tr>
-													<th>Rendering engine</th>
-													<th>Browser</th>
-													<th>Platform(s)</th>
-													<th>Engine version</th>
-													<th>CSS grade</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="odd gradeX">
-													<td>Trident</td>
-													<td>Internet Explorer 4.0</td>
-													<td>Win 95+</td>
-													<td class="center">4</td>
-													<td class="center">X</td>
-												</tr>
-												<tr class="even gradeC">
-													<td>Trident</td>
-													<td>Internet Explorer 5.0</td>
-													<td>Win 95+</td>
-													<td class="center">5</td>
-													<td class="center">C</td>
-												</tr>
-												<tr class="odd gradeA">
-													<td>Trident</td>
-													<td>Internet Explorer 5.5</td>
-													<td>Win 95+</td>
-													<td class="center">5.5</td>
-													<td class="center">A</td>
-												</tr>
-
-											</tbody>
-										</table>
-
-									</div>
-									<!--End Advanced Tables -->
+								<br>
+								<div id="txtHint">
+									<b>Company Details are listed here...</b>
 								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="add">
-							<h4>Add Companies</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-								do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco
-								laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-								dolor in reprehenderit in voluptate velit esse cillum dolore eu
-								fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est
-								laborum.</p>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	<div class="panel panel-default">
-								<div class="panel-heading">Advanced Tables</div>
-								<div class="panel-body">
-									<div class="table-responsive">
-										<table class="table table-striped table-bordered table-hover"
-											id="dataTables-example">
-											<thead>
-												<tr>
-													<th>Rendering engine</th>
-													<th>Browser</th>
-													<th>Platform(s)</th>
-													<th>Engine version</th>
-													<th>CSS grade</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="odd gradeX">
-													<td>Trident</td>
-													<td>Internet Explorer 4.0</td>
-													<td>Win 95+</td>
-													<td class="center">4</td>
-													<td class="center">X</td>
-												</tr>
-												<tr class="even gradeC">
-													<td>Trident</td>
-													<td>Internet Explorer 5.0</td>
-													<td>Win 95+</td>
-													<td class="center">5</td>
-													<td class="center">C</td>
-												</tr>
-												<tr class="odd gradeA">
-													<td>Trident</td>
-													<td>Internet Explorer 5.5</td>
-													<td>Win 95+</td>
-													<td class="center">5.5</td>
-													<td class="center">A</td>
-												</tr>
 
-											</tbody>
-										</table>
 
-									</div>
-									<!--End Advanced Tables -->
-								</div>
-							</div>
+
 	<!-- /. PAGE INNER  -->
 	<!--             </div> -->
 	<!-- /. PAGE WRAPPER  -->
 </div>
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 
-<!-- DATA TABLE SCRIPTS -->
-<script src="assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+
 
 <!-- CUSTOM SCRIPTS -->
 <script src="assets/js/custom.js"></script>
