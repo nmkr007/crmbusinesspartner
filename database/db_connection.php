@@ -68,7 +68,7 @@ function admin_page_protect() {
 		}
 	}
 	else {
-			header("Location: login.php");
+			header("Location: index.php");
 			exit();
 		}
 	}

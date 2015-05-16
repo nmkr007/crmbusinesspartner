@@ -1,25 +1,4 @@
-<?php include('adminheader.php')?> 
-<?php 
-$check_user_sql = "select count(*) from companies";
-	
-$result = mysqli_query ( $dbcon, $check_user_sql );
-
-	list ( $nof_companies) = mysqli_fetch_row ( $result );
-
-	$check_user_sql = "select count(*) from company_contact";
-	
-	$result = mysqli_query ( $dbcon, $check_user_sql );
-	
-	list ( $nof_contacts) = mysqli_fetch_row ( $result );
-	
-	$check_user_sql = "select count(*) from registration where regdate >= curdate() ";
-	
-	$result = mysqli_query ( $dbcon, $check_user_sql );
-	
-	list ( $nof_registrations) = mysqli_fetch_row ( $result );
-	
-	
-?>
+<?php include('companyheader.php')?> 
 
 
      <nav class="navbar-default navbar-side" role="navigation">
@@ -55,7 +34,7 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Admin Dashboard</h2>   
-                        <h5>Welcome <?=ucwords(strtolower($admin_user)) ?> , Love to see you back. </h5>
+                        <h5>Welcome <?=ucwords(strtolower($company_name)) ?> , Love to see you back. </h5>
                     </div>
                 </div>              
                  <!-- /. ROW  -->

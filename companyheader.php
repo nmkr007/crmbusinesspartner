@@ -1,7 +1,7 @@
 <?php
 include "database/db_connection.php";
 
-company_page_protect ();
+company_page_protect();
 
 if (isset ( $_SESSION ['company_name'] )) {
 	
