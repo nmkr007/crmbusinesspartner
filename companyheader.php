@@ -16,7 +16,7 @@ if (isset ( $_SESSION ['company_name'] )) {
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRM Admin Page</title>
+    <title>Company Home Page</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -38,7 +38,7 @@ if (isset ( $_SESSION ['company_name'] )) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CRM ADMIN</a> 
+                <a class="navbar-brand" href="index.php">Company</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
