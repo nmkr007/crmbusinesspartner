@@ -2,10 +2,11 @@
 
 <?php if (isset ( $_GET ['err'] )) {
 	if($_GET['err']==1){
-		echo "<script>alert ('Company already exists..')</script>";
+		echo "<script>alert ('Contact already exists..')</script>";
 	}
 }
 ?>
+
 <!-- BOOTSTRAP STYLES-->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONTAWESOME STYLES-->
@@ -32,14 +33,14 @@
 
 				<li><a href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
 						Dashboard</a></li>
-				<li><a class="active-menu" href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+				<li><a  href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="companies.php">View or Delete</a></li>
 						<li><a href="addcompanies.php">Add Companies</a></li>
 					</ul></li>
 
-				<li><a  href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
+				<li><a class="active-menu" href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="contacts.php">View or Delete</a></li>
@@ -72,20 +73,32 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Add Company Details</div>
 				<div class="panel-body">
-					<br> Enter Company details to add:
+					<br> Select Company details to add Contacts:
 
-					<form method="POST" action="insertcompanies.php">
-						<input type="text" name="fullname" placeholder="Full Name" value="" required>
-						<input type="text" name="username" placeholder="Username" value="" required>
-						<input type="password" name="password" placeholder="Password" value="" required>
+					<?php
+					
+						$sql = "select companyname from companies";
+						$result = mysqli_query ( $dbcon, $sql );
+						
+						if (mysqli_num_rows ( $result ) > 0) {
+							echo "<form method=\"POST\" action=\"insertcontacts.php\"><select name=\"company\" >";
+						//	echo "<option value=\"\">Select a Company:</option>";
+							while ( $row = mysqli_fetch_assoc ( $result ) ) {
+								echo "<option>" . $row ["companyname"] . "</option>";
+							}
+							echo "</select><br>";
+							
+							echo "<input type=\"email\" name=\"email\" placeholder=\"Email\" value=\"\" required>
+						<input type=\"text\" name=\"firstname\" placeholder=\"Firstname\" value=\"\" required>
+						<input type=\"text\" name=\"lastname\" placeholder=\"Lastname\" value=\"\" required>
 
-						<input class="btn btn-success" type="submit" value="Add more"
-							name="addcompany1">
-									<input class="btn btn-success" type="submit" 
-						value="Final Entry" name="addcompany2">						 
-					</form>
-
-
+						<input class=\"btn btn-success\" type=\"submit\" value=\"Add more\"
+							name=\"addcontact1\">
+									<input class=\"btn btn-success\" type=\"submit\" 
+						value=\"Final Entry\" name=\"addcontact2\"></form>";
+						}
+						
+						?>
 				</div>
 			</div>
 		</div>
