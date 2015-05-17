@@ -1,11 +1,11 @@
 <?php
 include ("database/db_connection.php");
-// session_start (); // session starts here
+session_start (); // session starts here
 
-if (isset ( $_SESSION ['admin_user'] )) {
+if(isset ( $_SESSION ['companyid'] )){
+	header ( "Location: companyhome.php" );
+}else if (isset ( $_SESSION ['adminid'] )) {
 	header ( "Location: adminhome.php" );
-}else if(isset ( $_SESSION ['company_name'] )){
-	header("Location: companyhome.php");
 }
 
 $err = array ();
@@ -16,8 +16,8 @@ if (isset ( $_POST ['login'] ) && $_POST ['login'] == 'login') {
 		foreach ( $_POST as $key => $value ) {
 			$data [$key] = filter ( $value ); // post variables are filtered
 		}
-		$user_username = $data ['username'];
-		$user_pass = $data ['pass'];
+		$user_username = $_POST ['username'];
+		$user_pass = $_POST ['pass'];
 		if ($_POST ['type'] == 'admin') {
 			$check_user_sql = "select adminid, admin_user, password, firstname, lastname from admin WHERE admin_user='$user_username'AND password='$user_pass'";
 			
