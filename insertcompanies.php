@@ -16,8 +16,7 @@ if (isset ( $_POST ['addcompany1'] )) {
 			echo "<script>alert ('$fullname')</script>";
 			header ( "Location: addcompanies.php" );
 		} else {
-			echo "<script>alert ('There is a problem, Error while inserting..".$fullname."')</script>";
-			break;
+			echo "<script>alert ('Company already exists..')</script>";
 		}
 }
 elseif (isset ( $_POST ['addcompany2'] )) {
@@ -33,8 +32,7 @@ elseif (isset ( $_POST ['addcompany2'] )) {
 		if ($result) {
 			header ( "Location: adminhome.php" );
 		} else {
-			echo "<script>alert ('There is a problem, Error while inserting..')</script>";
-			break;
+			echo "<script>alert ('Company already exists..')</script>";
 		}
 }
 

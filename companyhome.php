@@ -30,17 +30,11 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 				
 					
                     <li>
-                        <a class="active-menu"  href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                        <a class="active-menu"  href="viewregistration.php"><i class="fa fa-dashboard fa-3x"></i> View</a>
                     </li>
                      <li>
-                        <a  href="companies.php"><i class="fa fa-desktop fa-3x"></i>Companies</a>
-                    </li>
-                    <li>
-                        <a  href="contacts.php"><i class="fa fa-qrcode fa-3x"></i>Contacts</a>
-                    </li>
-                    <li>
-                        <a  href="adminregistrations.php"><i class="fa fa-table fa-3x"></i>View Registration</a>
-                    </li>					
+                        <a  href="addregistration.php"><i class="fa fa-desktop fa-3x"></i>Register</a>
+                    </li>			
 
                 </ul>
                
