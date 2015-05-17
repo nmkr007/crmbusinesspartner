@@ -21,38 +21,44 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 	
 ?>
 <div class="wrapper">
-		<nav class="navbar-default navbar-side" role="navigation">
-			<div class="sidebar-collapse">
-				<ul class="nav" id="main-menu">
-					<li class="text-center"><img src="assets/img/find_user.png"
-						class="user-image img-responsive" /></li>
+	<nav class="navbar-default navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li class="text-center"><img src="assets/img/find_user.png"
+					class="user-image img-responsive" /></li>
 
 
-					<li><a class="active-menu" href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
-							Dashboard</a></li>
-					<li><a href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
-							class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="companies.php">View or Delete</a></li>
-							<li><a href="addcompanies.php">Add Companies</a></li>
-						</ul></li>
+				<li><a  class="active-menu" href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
+						Dashboard</a></li>
+				<li><a href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="companies.php">View or Delete</a></li>
+						<li><a href="addcompanies.php">Add Companies</a></li>
+					</ul></li>
 
-					<li><a href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
-							class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="contacts.php">View or Delete</a></li>
-							<li><a href="addcontacts.php">Add Contacts</a></li>
-						</ul></li>
+				<li><a  href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="contacts.php">View or Delete</a></li>
+						<li><a href="addcontacts.php">Add Contacts</a></li>
+					</ul>
+				</li>
+				
+				<li><a href="#"><i class="fa fa-table fa-3x"></i>Registrations<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="allregistrations.php">All Registrations</a></li>
+						<li><a href="dateregistrations.php">View By Date</a></li>
+					</ul>
+				</li>
 
-					<li><a href="adminregistrations.php"><i class="fa fa-table fa-3x"></i>View
-							Registration</a></li>
+			</ul>
 
-				</ul>
+		</div>
 
-			</div>
-
-		</nav>
-	</div>
+	</nav>
+</div>
 
 
     
