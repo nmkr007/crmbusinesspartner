@@ -1,5 +1,5 @@
 <?php
-function gmail($to, $subject, $message){
+function gmail_remainder($to, $subject, $message){
     //path to PHPMailer class
     require_once('./Mail/class.phpmailer.php');
     // optional, gets called from within class.phpmailer.php if not already loaded
@@ -50,8 +50,30 @@ function gmail($to, $subject, $message){
         return true;
     }
 }
+include "database/db_connection.php";
+if (isset ( $_GET ['q'] )) {
+	$regdate = $_GET ['q'];
 
-gmail("k.sampathsree@gmail.com", "WARNING FOR UNLICENSED USAGE OF BRAND NAME - 'CRM BUSINESS'", "Hello Sai Kiran, This is a warning mail before we go
-		further with your case on usage of brand name with prior issued approval. Hence see that you are not using our brand name, i.e, 'CRM BUSINESS'
-		Thank you, Alex, CRM BUSINESS SOLUTIONS, California" );
+	$sql = "select a.regdate as regdate, b.company_fullname as companyname,
+ a.personname as name, a.email as email from registration a join companies b on a.companyid = b.companyid
+ and a.regdate = '$regdate'";
+	
+	$result = mysqli_query ( $dbcon, $sql );
+
+	if (mysqli_num_rows ( $result ) ==1) {
+
+
+list ( $regdate,$companyname, $name, $email ) = mysqli_fetch_row ( $result );
+
+$emailbody = "Hi ".$name.", <p>This is a reminder mail regarding your registration.</p>
+		<p>You have registered for an event on ".$regdate." on behalf of ".$companyname." Thankyou</p>";
+
+if(gmail_remainder($email, "Registration Reminder", $emailbody )){
+	header ( "Location: allregistrations.php?q=".$email );
+	
+}else{
+	header ( "Location: allregistrations.php?q=0" );
+}
+	}
+}
 ?>

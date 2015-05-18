@@ -47,12 +47,7 @@
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="fa fa-table fa-3x"></i>Registrations<span
-						class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-						<li><a href="allregistrations.php">All Registrations</a></li>
-						<li><a href="dateregistrations.php">View By Date</a></li>
-					</ul>
+				<li><a href="allregistrations.php"><i class="fa fa-table fa-3x"></i>Registrations</a>
 				</li>
 
 			</ul>

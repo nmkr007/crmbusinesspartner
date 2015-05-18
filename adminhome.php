@@ -45,12 +45,7 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 					</ul>
 				</li>
 				
-				<li><a href="#"><i class="fa fa-table fa-3x"></i>Registrations<span
-						class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-						<li><a href="allregistrations.php">All Registrations</a></li>
-						<li><a href="dateregistrations.php">View By Date</a></li>
-					</ul>
+				<li><a href="allregistrations.php"><i class="fa fa-table fa-3x"></i>Registrations</a>
 				</li>
 
 			</ul>
@@ -104,7 +99,7 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-bell-o"></i>
                 </span>
-                <div class="text-box" ><a href="adminregistrations.php">
+                <div class="text-box" ><a href="allregistrations.php">
                     <p class="main-text"><?=$nof_registrations ?></p>
                     <p class="text-muted">Registrations</p></a>
                 </div>

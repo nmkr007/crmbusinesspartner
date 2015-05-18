@@ -1,4 +1,5 @@
 <?php include('adminheader.php')?>
+
 <!-- BOOTSTRAP STYLES-->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONTAWESOME STYLES-->
@@ -18,8 +19,11 @@
 <script>
 //This Ajax Redirect to _SELF and excute php to display Job Information for selected Department
 function showcontent(str) {
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "Company Details are listed here...";
+	if(str == "Show All"){
+		str=1;
+		}
+	if (str == "") {
+        document.getElementById("txtHint").innerHTML = "List of Registrations are displayed here...";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -34,7 +38,7 @@ function showcontent(str) {
                 document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","displaycompanies.php?q="+str,true);
+        xmlhttp.open("GET","showallregistrations.php?id="+str,true);
         xmlhttp.send();
     }
 }
@@ -49,22 +53,21 @@ function showcontent(str) {
 
 				<li><a href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
 						Dashboard</a></li>
-				<li><a class="active-menu" href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+				<li><a  href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="companies.php">View or Delete</a></li>
 						<li><a href="addcompanies.php">Add Companies</a></li>
 					</ul></li>
 
-				<li><a  href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
+				<li><a href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="contacts.php">View or Delete</a></li>
 						<li><a href="addcontacts.php">Add Contacts</a></li>
-					</ul>
-				</li>
-				
-				<li><a href="allregistrations.php"><i class="fa fa-table fa-3x"></i>Registrations</a>
+					</ul></li>
+
+				<li><a class="active-menu" href="allregistrations.php"><i class="fa fa-table fa-3x"></i>Registrations</a>
 				</li>
 
 			</ul>
@@ -80,48 +83,46 @@ function showcontent(str) {
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">View or Delete Company Details</div>
+				<div class="panel-heading">View or Delete Registrations</div>
 				<div class="panel-body">
+				<div id="msg" style="color: Green;" align="center">
+				<?php 
+if (isset ( $_GET ['q'] )) {
+	
+if($_GET['q'] != '0' ){
+	echo "<span style=\"color: Green;\">Mail has been sent to ".$_GET['q']."</span>";
+}
+else{
+	
+	echo "<span style=\"color: Red;\">Error while sending mail, Please try again later..</span>";
+}
+}
+?>
+				</div>
 					<br>
-						<form>
-							Select Company starting with:
-							 			<select name="company" onchange="showcontent(this.value)">
-										<option value="">Select</option>
-										<option value="%">ALL</option>
-										<option value="A%">A</option>
-										<option value="B%">B</option>
-										<option value="C%">C</option>
-										<option value="D%">D</option>
-										<option value="E%">E</option>
-										<option value="F%">F</option>
-										<option value="G%">G</option>
-										<option value="H%">H</option>
-										<option value="I%">I</option>
-										<option value="J%">J</option>
-										<option value="K%">K</option>
-										<option value="L%">L</option>
-										<option value="M%">M</option>
-										<option value="N%">N</option>
-										<option value="O%">O</option>
-										<option value="P%">P</option>
-										<option value="Q%">Q</option>
-										<option value="R%">R</option>
-										<option value="S%">S</option>
-										<option value="T%">T</option>
-										<option value="U%">U</option>
-										<option value="V%">V</option>
-										<option value="W%">W</option>
-										<option value="X%">X</option>
-										<option value="Y%">Y</option>
-										<option value="Z%">Z</option>
-									</select>
-								</form>
-
-
-								<br>
-								<div id="txtHint">
-									<b>Company Details are listed here...</b>
-								</div>
+					<div class="row">
+						<div class="col-md-3">
+								<input class="btn btn-success" type="submit"
+									name="regall" id="regall" value="Show All"
+									onclick="showcontent(this.value)">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR
+						
+						</div>
+						<div class="col-md-4" align="left">
+							<form>
+								Select Date: <input type="date" name="registrationdate"
+									max="2016-01-02" min="2014-12-31"
+									onchange="showcontent(this.value)">
+							</form>
+						</div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+					</div>
+					<br>
+					<div id="txtHint">
+						<b>Registration Details are listed here...</b>
+					</div>
 				</div>
 			</div>
 		</div>
