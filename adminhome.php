@@ -111,11 +111,7 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 			</div>
                  <!-- /. ROW  -->
                 <hr />                
-        <p>
-        Admin should be able add delete and view companies.<br>
-Admin should be able to add ,delete and view contacts.<br>
-Admin should be able to view list of dates and the companies who have registered for the date, as well as its point of contact and email address.
-</p>            
+                   
                  <!-- /. ROW  -->           
     </div>
            <?php include 'footer.php';?>

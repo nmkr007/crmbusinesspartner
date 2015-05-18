@@ -149,7 +149,7 @@ if (isset ( $_POST ['login'] ) && $_POST ['login'] == 'login') {
             <div class="row">
 			    <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <img class="img-responsive" src="assets/img/profile.png" alt="">
+                    <img class="img-responsive" width="200px" height="200px" src="assets/img/profile.png" alt="">
                     
                     <?php
 					/**

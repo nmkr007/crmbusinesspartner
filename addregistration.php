@@ -29,8 +29,42 @@ if (isset ( $_POST ['register'] )) {
 		
 		$result = mysqli_query ( $dbcon, $insert_reg_query );
 		if ($result) {
+			
+			$sql = "select b.company_fullname as companyname from registration a join companies b
+			 on a.companyid = b.companyid and a.regdate = '$regdate'";
+			
+			$result = mysqli_query ( $dbcon, $sql );
+			
+			if (mysqli_num_rows ( $result ) ==1) {
+			
+			
+				list ( $companyname ) = mysqli_fetch_row ( $result );
+			
+			include "emailsetting.php";
+			
+			
+			$body = "<p>Dear User,</p>
+			<p>An event has been registered on behalf of $companyname. The details of the event are:</p>
+			<p>Date: $regdate.</p>
+			<p>Point of Contact: $personname.</p>
+			<p>Number of internships: $intern_positions.</p>
+			<p>Number of fulltime positions: $fulltime_positions.</p>
+			<p>Number of people attending the event: $peoplecount</p>
+			<br><p>Many Thanks</p>
+			<p>Event Registration Team</p>";
+			
+			if(gmail_remainder($email, "Event Registration Details", $body )){
+				gmail_remainder("crmbusinesspartner@gmail.com", "Event Registration Details", $body );
+				header ( "Location: addregistration.php?q=".$email );
+	
+}else{
+	header ( "Location: addregistrations.php?q=0" );
+}
+			
+			
+			
 			header ( "Location: addregistration.php" );
-		} else {
+	}	} else {
 			echo "<script>alert ('There is a problem, Error while inserting..".$regdate."')</script>";
 			header ( "Location: addregistration.php?err=1" );
 		}
@@ -103,24 +137,40 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fill the form to register for an event</p>     
                 
                 <div class="panel-body">
-						<form role="form" method="post" action="companyregistrations.php">
+                
+                <div id="msg"  align="center">
+				<?php 
+if (isset ( $_GET ['q'] )) {
+	
+if($_GET['q'] != '0' ){
+	echo "<span style=\"color: Green;\">Mail has been sent to ".$_GET['q']."and Admin</span>";
+}
+else{
+	
+	echo "<span style=\"color: Red;\">Error while sending mail, Please try again later..</span>";
+}
+}
+?>
+				</div>
+                
+						<form role="form" method="post" action="addregistration.php">
 							<fieldset>
 								<div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Person Name" name="personname" type="text" autofocus>
+										<input class="form-control" placeholder="Person Name" name="personname" type="text" autofocus required>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Email" name="email" type="email">
+										<input class="form-control" placeholder="Email" name="email" type="email" required>
 									</div>
 								</div>&nbsp;
 								
 
 								<div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Contact Number" name="contact" type="text">
+										<input class="form-control" placeholder="Contact Number" name="contact" type="text" required>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Address Line1" name="line1" type="text">
+										<input class="form-control" placeholder="Address Line1" name="line1" type="text" required>
 									</div>
 								</div>&nbsp;
 								
@@ -129,32 +179,96 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
 										<input class="form-control" placeholder="Address Line2" name="line2" type="text">
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Intern Positions" name="intern_positions" type="number" min="0">
+										<input class="form-control" placeholder="Intern Positions" name="intern_positions" type="number" min="0" required>
 									</div>
 								</div>&nbsp;
 								
 								<div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Fulltime Positions" name="fulltime_positions" type="number" min="0">
+										<input class="form-control" placeholder="Fulltime Positions" name="fulltime_positions" type="number" min="0" required>
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="People Count" name="peoplecount" type="number" min="1">
+										<input class="form-control" placeholder="People Count" name="peoplecount" type="number" min="1" required>
 									</div>
 								</div>&nbsp;
 								
 								<div>
-									<div class="col-md-6">
-										<input class="form-control" placeholder="State" name="state" type="text">
+									<div class="col-md-6">		
+										<select class="form-control" id="stateselect" name="state" required>
+										<option>AL</option>
+										<option>AK</option>
+										<option>AS</option>
+										<option>AZ</option>
+										<option>AR</option>
+										<option>CA</option>
+										<option>CO</option>
+										<option>CT</option>
+										<option>DE</option>
+										<option>DC</option>
+										<option>FM</option>
+										<option>FL</option>
+										<option>GA</option>
+										<option>GU</option>
+										<option>HI</option>
+										<option>ID</option>
+										<option>IL</option>
+										<option>IN</option>
+										<option>IA</option>
+										<option>KS</option>
+										<option>KY</option>
+										<option>LA</option>
+										<option>ME</option>
+										<option>MH</option>
+										<option>MD</option>
+										<option>MA</option>
+										<option>MI</option>
+										<option>MN</option>
+										<option>MS</option>
+										<option>MO</option>
+										<option>MT</option>
+										<option>NE</option>
+										<option>NV</option>
+										<option>NH</option>
+										<option>NJ</option>
+										<option>NM</option>
+										<option>NY</option>
+										<option selected>NC</option>
+										<option>ND</option>
+										<option>MP</option>
+										<option>OH</option>
+										<option>OK</option>
+										<option>OR</option>
+										<option>PW</option>
+										<option>PA</option>
+										<option>PR</option>
+										<option>RI</option>
+										<option>SC</option>
+										<option>SD</option>
+										<option>TN</option>
+										<option>TX</option>
+										<option>UT</option>
+										<option>VT</option>
+										<option>VA</option>
+										<option>VI</option>
+										<option>WA</option>
+										<option>DC</option>
+										<option>WV</option>
+										<option>WI</option>
+										<option>WY</option>
+									</select>
+										
+										
+										
 									</div>
 									<div class="col-md-6">
-										<input class="form-control" placeholder="Zip Code" name="zip" type="text">
+										<input class="form-control" placeholder="Zip Code" name="zip" type="text" maxlength="5" required>
 									</div>
 								</div>&nbsp;
 
 								<div>
 									<div class="col-md-3">
 										<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/redmond/jquery-ui.css" type="text/css" />
-<input class="form-control" name="regdate" type="date" />
+<input class="form-control" name="regdate" type="date" min="<?php echo date('Y-m-d');?>"/>
 									</div>
 								</div><br><br><br>
 								

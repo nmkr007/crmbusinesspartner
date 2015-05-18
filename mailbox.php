@@ -95,7 +95,8 @@ function decode_imap_text($str){
 			<div class="panel panel-default">
 				<div class="panel-heading">Mail Box</div>
 				<div class="panel-body">
-
+<a href="mailbox.php"><input class="btn btn-success" type="submit"
+									name="refresh" id="refresh" value="Refresh"></a><br><br>	
 				<link href="css/demo.css" rel="stylesheet" type="text/css" />
 			
 	<?php if (!count($mailboxes)) { ?>
