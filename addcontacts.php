@@ -50,7 +50,9 @@
 				
 				<li><a href="allregistrations.php"><i class="fa fa-table fa-3x"></i>Registrations</a>
 				</li>
-
+<li><a href="mailbox.php"><i class="fa fa-edit fa-3x"></i>Mail Box</a>
+				</li>
+				
 			</ul>
 
 		</div>

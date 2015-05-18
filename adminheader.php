@@ -40,7 +40,7 @@ if (isset ( $_SESSION ['admin_user'] )) {
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.php">CRM ADMIN</a>
+			<a class="navbar-brand" href="index.php">ADMIN</a>
 		</div>
 		<div
 			style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;"> <?=ucwords(strtolower($admin_user)) ?> &nbsp; <a
