@@ -66,7 +66,7 @@ if (isset ( $_GET ['q'] )) {
 list ( $regdate,$companyname, $name, $email ) = mysqli_fetch_row ( $result );
 
 $emailbody = "Hi ".$name.", <p>This is a reminder mail regarding your registration.</p>
-		<p>You have registered for an event on ".$regdate." on behalf of ".$companyname." Thankyou</p>";
+		<p>You have registered for an event on ".$regdate." on behalf of ".$companyname."</p><p> Thankyou</p>";
 
 if(gmail_remainder($email, "Registration Reminder", $emailbody )){
 	header ( "Location: allregistrations.php?q=".$email );
