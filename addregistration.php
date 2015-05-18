@@ -5,6 +5,36 @@
 		echo "<script>alert ('An event already exists for that date, register on new date..')</script>";
 	}
 }
+
+if (isset ( $_POST ['register'] )) {
+		
+		$personname = $_POST ['personname'];
+		$email = $_POST ['email'];
+		$contact = $_POST ['contact'];
+		$line1 = $_POST ['line1'];
+		$line2 = $_POST ['line2'];
+		$intern_positions = $_POST ['intern_positions'];
+		$fulltime_positions = $_POST ['fulltime_positions'];
+		$peoplecount = $_POST ['peoplecount'];
+		$state = $_POST ['state'];
+		$zip = $_POST ['zip'];
+		$regdate = $_POST ['regdate'];
+		
+		$regdate =  date('Y-m-d', strtotime($regdate));
+		$companyid;
+		
+		$insert_reg_query = "INSERT INTO registration
+		(regdate, personname, email, contact, companyid, line1, line2, intern_positions, fulltime_positions, peoplecount, state, zip)
+		VALUES('$regdate','$personname','$email','$contact','$companyid','$line1','$line2','$intern_positions','$fulltime_positions','$peoplecount','$state','$zip')";
+		
+		$result = mysqli_query ( $dbcon, $insert_reg_query );
+		if ($result) {
+			header ( "Location: addregistration.php" );
+		} else {
+			echo "<script>alert ('There is a problem, Error while inserting..".$regdate."')</script>";
+			header ( "Location: addregistration.php?err=1" );
+		}
+}
 ?>
 
 <!-- <link href="assets/css/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
@@ -122,7 +152,7 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
 								<div>
 									<div class="col-md-3">
 										<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/redmond/jquery-ui.css" type="text/css" />
-<input id="iDate" />
+<input class="form-control" name="regdate" type="date" />
 									</div>
 								</div><br><br><br>
 								
@@ -135,34 +165,6 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
 					
 					
 					
-<?php
-if (isset ( $_POST ['register'] )) {
-		
-		$personname = $_POST ['personname'];
-		$email = $_POST ['email'];
-		$contact = $_POST ['contact'];
-		$line1 = $_POST ['line1'];
-		$line2 = $_POST ['line2'];
-		$intern_positions = $_POST ['intern_positions'];
-		$fulltime_positions = $_POST ['fulltime_positions'];
-		$peoplecount = $_POST ['peoplecount'];
-		$state = $_POST ['state'];
-		$zip = $_POST ['zip'];
-		$regdate = $_POST ['regdate'];
-		$companyid;
-		
-		$insert_reg_query = "INSERT INTO registration
-		(regdate, personname, email, contact, companyid, line1, line2, intern_positions, fulltime_positions, peoplecount, state, zip)
-		VALUES('$regdate','$personname','$email','$contact','$companyid',$line1','$line2','$intern_positions','$fulltime_positions','$peoplecount','$state','$zip')";
-		
-		$result = mysqli_query ( $dbcon, $insert_reg_query );
-		if ($result) {
-			header ( "Location: addregistration.php" );
-		} else {
-			echo "<script>alert ('There is a problem, Error while inserting..".$regdate."')</script>";
-			header ( "Location: addregistration.php?err=1" );
-		}
-}
-?>
+
 					
 <?php include 'footer.php';?>

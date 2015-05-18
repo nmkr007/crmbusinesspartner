@@ -45,7 +45,7 @@ if (isset ( $_GET ['id'] )) {
 						$row ["regdate"] . "</td><td>". $row ['companyname'] ."</td><td>". $row ['name'] .
 						"</td><td>". $row ['email'] .
 						"</td><td align = 'center'><a href=\"email.php?q=".$row ["regdate"].
-						"\"onclick=\"return confirm('Are you sure?');\" <span class=\"glyphicon glyphicon-send\" style=\"color:red\" aria-hidden=\"true\"></span></a>
+						"\"onclick=\"return confirm('Are you sure you want to send mail?');\" <span class=\"glyphicon glyphicon-send\" style=\"color:blue\" aria-hidden=\"true\"></span></a>
 			</td><td align = 'center'><a href=\"deleteregistration.php?q=".$row ["regdate"].
 					"\"onclick=\"return confirm('Are you sure?');\" <span class=\"glyphicon glyphicon-remove-circle\" style=\"color:red\" aria-hidden=\"true\"></span></a>
 			</td></tr>";
