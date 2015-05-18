@@ -1,11 +1,5 @@
-<?php include('adminheader.php')?>
+<?php include('companyheader.php')?>
 
-<?php if (isset ( $_GET ['err'] )) {
-	if($_GET['err']==1){
-		echo "<script>alert ('Company already exists..')</script>";
-	}
-}
-?>
 <!-- BOOTSTRAP STYLES-->
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FONTAWESOME STYLES-->
@@ -22,6 +16,30 @@
 	rel="stylesheet" />
 <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
 
+<script>
+//This Ajax Redirect to _SELF and excute php to display Job Information for selected Department
+function showcontent(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "List of Contacts will be listed here...";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","displaycompanycontacts.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
 <div class="wrapper">
 	<nav class="navbar-default navbar-side" role="navigation">
 		<div class="sidebar-collapse">
@@ -32,15 +50,14 @@
 
 				<li><a href="adminhome.php"><i class="fa fa-dashboard fa-3x"></i>
 						Dashboard</a></li>
-				<li><a class="active-menu" href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
+				<li><a href="#"><i class="fa fa-desktop fa-3x"></i>Companies<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="companies.php">View or Delete</a></li>
 						<li><a href="addcompanies.php">Add Companies</a></li>
-					</ul>
-				</li>
+					</ul></li>
 
-				<li><a  href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
+				<li><a class="active-menu" href="#"><i class="fa fa-qrcode fa-3x"></i>Contacts<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="contacts.php">View or Delete</a></li>
@@ -57,8 +74,6 @@
 
 	</nav>
 </div>
-
-
 <!-- /. NAV SIDE  -->
 <div id="page-wrapper">
 	<!--             <div id="page-inner"> -->
@@ -66,22 +81,28 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Add Company Details</div>
+				<div class="panel-heading">View or Delete Company Contact Details</div>
 				<div class="panel-body">
-					<br> Enter Company details to add:
-
-					<form method="POST" action="insertcompanies.php">
-						<input type="text" name="fullname" placeholder="Full Name" value="" required>
-						<input type="text" name="username" placeholder="Username" value="" required>
-						<input type="password" name="password" placeholder="Password" value="" required>
-
-						<input class="btn btn-success" type="submit" value="Add more"
-							name="addcompany1">
-									<input class="btn btn-success" type="submit" 
-						value="Final Entry" name="addcompany2">						 
-					</form>
-
-
+					<br>
+						<?php
+					
+						$sql = "select companyname from companies";
+						$result = mysqli_query ( $dbcon, $sql );
+						
+						if (mysqli_num_rows ( $result ) > 0) {
+							echo "<form><select name=\"Company\" onchange=\"showcontent(this.value)\">";
+							echo "<option value=\"\">Select a Company:</option>";
+							while ( $row = mysqli_fetch_assoc ( $result ) ) {
+								echo "<option>" . $row ["companyname"] . "</option>";
+							}
+							echo "</select></form>";
+						}
+						
+						?>
+<br>
+					<div id="txtHint">
+						<b>List of Contacts for a Company will be listed here...</b>
+					</div>
 				</div>
 			</div>
 		</div>

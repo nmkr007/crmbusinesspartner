@@ -1,24 +1,11 @@
 <?php include('companyheader.php')?> 
 <?php 
-$check_user_sql = "select count(*) from companies";
-	
-$result = mysqli_query ( $dbcon, $check_user_sql );
-
-	list ( $nof_companies) = mysqli_fetch_row ( $result );
-
-	$check_user_sql = "select count(*) from company_contact";
-	
+	$check_user_sql = "select count(*) from company_contact where companyid=$companyid";
 	$result = mysqli_query ( $dbcon, $check_user_sql );
-	
 	list ( $nof_contacts) = mysqli_fetch_row ( $result );
-	
-	$check_user_sql = "select count(*) from registration where regdate >= curdate()";
-	
+	$check_user_sql = "select count(*) from registration where companyid=$companyid and regdate >= curdate()";
 	$result = mysqli_query ( $dbcon, $check_user_sql );
-	
 	list ( $nof_registrations) = mysqli_fetch_row ( $result );
-	
-	
 ?>
 
      <nav class="navbar-default navbar-side" role="navigation">
@@ -30,11 +17,16 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 				
 					
                     <li>
-                        <a class="active-menu"  href="companyhome.php"><i class="fa fa-dashboard fa-3x"></i> View</a>
-                    </li>
-                     <li>
-                        <a  href="addregistration.php"><i class="fa fa-desktop fa-3x"></i>Register</a>
-                    </li>			
+                        <a class="active-menu"  href="companyhome.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>	
+                    
+                    <li><a href="#"><i class="fa fa-desktop fa-3x"></i>Registrations<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="companyregistrations.php">View</a></li>
+						<li><a href="addregistration.php">New Registration</a></li>
+					</ul>
+				</li>		
 
                 </ul>
                
@@ -55,26 +47,16 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
                   <hr />
                 <div class="row">
                 
-                  <div class="col-md-4 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-brown set-icon">
-                    <i class="fa fa-rocket"></i>
-                </span>
-                <div class="text-box" ><a href="companies.php">
-                    <p class="main-text"><?=$nof_companies ?></p>
-                    <p class="text-muted">Companies</p>
-                </div>
-             </div>
-		     </div>
+                  
 		     
                 <div class="col-md-4 col-sm-6 col-xs-6">           
 				<div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>
-                <div class="text-box" ><a href="contacts.php">
+                <div class="text-box" >
                     <p class="main-text"><?=$nof_contacts ?></p>
-                    <p class="text-muted">Contacts</p></a>
+                    <p class="text-muted">Contacts</p>
                 </div>
              </div>
 		     </div>
@@ -84,9 +66,9 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-bell-o"></i>
                 </span>
-                <div class="text-box" ><a href="adminregistrations.php">
+                <div class="text-box" >
                     <p class="main-text"><?=$nof_registrations ?></p>
-                    <p class="text-muted">Registrations</p></a>
+                    <p class="text-muted">Upcoming Registrations</p>
                 </div>
              </div>
 		     </div>

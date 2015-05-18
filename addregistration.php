@@ -79,14 +79,16 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
 				
 					
                     <li>
-                        <a class="active-menu"  href="companyhome.php"><i class="fa fa-dashboard fa-3x"></i> View</a>
-                    </li>
-                     <li>
-                        <a  href="addregistration.php"><i class="fa fa-desktop fa-3x"></i>Register</a>
+                        <a class="active-menu"  href="companyhome.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>	
-                    <li>
-                        <a  href="#"><i ></i></a>
-                    </li>		
+                    
+                    <li><a href="#"><i class="fa fa-desktop fa-3x"></i>Registrations<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="companyregistrations.php">View</a></li>
+						<li><a href="addregistration.php">New Registration</a></li>
+					</ul>
+				</li>		
 
                 </ul>
                
@@ -98,10 +100,10 @@ $('#iDate').datepicker({ beforeShowDay: unavailable });
         <div id="page-wrapper" >
             <div id="page-inner">
                              
-                     
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fill the form to register for an event</p>     
                 
                 <div class="panel-body">
-						<form role="form" method="post" action="addregistration.php">
+						<form role="form" method="post" action="companyregistrations.php">
 							<fieldset>
 								<div>
 									<div class="col-md-6">
