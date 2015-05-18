@@ -1,6 +1,8 @@
 <?php include('companyheader.php')?>
 
-<?php if (isset ( $_GET ['err'] )) {
+<?php 
+
+if (isset ( $_GET ['err'] )) {
 	if($_GET['err']==1){
 		echo "<script>alert ('An event already exists for that date, register on new date..')</script>";
 	}
@@ -71,39 +73,31 @@ if (isset ( $_POST ['register'] )) {
 }
 ?>
 
-<!-- <link href="assets/css/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
-
-<style>
-.disabled span{
-    color:red !important;
-    background:white !important;    
-}
-.enabled a{
-    color:black !important;
-    background:white !important;    
-}
-
-</style>
-<script type="text/javascript">
-
-var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-var unavailableDates = ["2015/05/26","2015/05/27","2015/06/05"]; // yyyy/MM/dd
-var unavailableDays = [];
-
-function unavailable(date) {
-    ymd = date.getFullYear() + "/" + ("0"+(date.getMonth()+1)).slice(-2) + "/" + ("0"+date.getDate()).slice(-2);
-    day = new Date(ymd).getDay();
-    if ($.inArray(ymd, unavailableDates) < 0 && $.inArray(days[day], unavailableDays) < 0) {
-        return [true, "enabled", "Book Now"];
-    } else {
-        return [false,"disabled","Booked Out"];
+<script>
+//This Ajax Redirect to _SELF and excute php to display Job Information for selected Department
+function showcontent(str) {
+	if (str == "") {
+        document.getElementById("txtHint").innerHTML = "Please Select Date of Registration";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","checkdates.php?id="+str,true);
+        xmlhttp.send();
     }
 }
-
-$('#iDate').datepicker({ beforeShowDay: unavailable });
-
-
 </script>
+
      <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
@@ -267,8 +261,9 @@ else{
 
 								<div>
 									<div class="col-md-3">
-										<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/redmond/jquery-ui.css" type="text/css" />
-<input class="form-control" name="regdate" type="date" min="<?php echo date('Y-m-d');?>"/>
+										<input class="form-control" name="regdate" type="date" min="<?php echo date('Y-m-d');?>" onchange="showcontent(this.value)"/>
+									</div>
+									<div class="col-md-3" id="txtHint">
 									</div>
 								</div><br><br><br>
 								
