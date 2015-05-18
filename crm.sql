@@ -13,6 +13,7 @@ CREATE TABLE crm.companies (
   companyid INT NOT NULL AUTO_INCREMENT,
   companyname VARCHAR(45) NOT NULL,
   password VARCHAR(45) NOT NULL,
+  company_fullname VARCHAR(100) NOT NULL
   PRIMARY KEY (companyid),
   UNIQUE INDEX companyname_UNIQUE (companyname ASC));
 
