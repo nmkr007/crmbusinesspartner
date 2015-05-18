@@ -30,7 +30,7 @@ $result = mysqli_query ( $dbcon, $check_user_sql );
 				
 					
                     <li>
-                        <a class="active-menu"  href="viewregistration.php"><i class="fa fa-dashboard fa-3x"></i> View</a>
+                        <a class="active-menu"  href="companyhome.php"><i class="fa fa-dashboard fa-3x"></i> View</a>
                     </li>
                      <li>
                         <a  href="addregistration.php"><i class="fa fa-desktop fa-3x"></i>Register</a>

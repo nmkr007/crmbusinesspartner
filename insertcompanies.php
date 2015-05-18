@@ -16,12 +16,9 @@ if (isset ( $_POST ['addcompany1'] )) {
 			echo "<script>alert ('$fullname')</script>";
 			header ( "Location: addcompanies.php" );
 		} else {
-<<<<<<< HEAD
 			echo "<script>alert ('Company already exists..')</script>";
-=======
 			echo "<script>alert ('There is a problem, Error while inserting..".$fullname."')</script>";
 			header ( "Location: addcompanies.php?err=1" );
->>>>>>> origin/master
 		}
 }
 elseif (isset ( $_POST ['addcompany2'] )) {
@@ -37,12 +34,9 @@ elseif (isset ( $_POST ['addcompany2'] )) {
 		if ($result) {
 			header ( "Location: adminhome.php" );
 		} else {
-<<<<<<< HEAD
 			echo "<script>alert ('Company already exists..')</script>";
-=======
 			echo "<script>alert ('There is a problem, Error while inserting..".$fullname."')</script>";
 			header ( "Location: addcompanies.php?err=1" );
->>>>>>> origin/master
 		}
 }
 
